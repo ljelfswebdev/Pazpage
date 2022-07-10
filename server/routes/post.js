@@ -4,14 +4,16 @@ import formidable from 'express-formidable';
 const router = express.Router();
 
 // middleware
-import { requireSignin, canEditDeletePost, isAdmin  } from "../middlewares";
+import { requireSignin, canEditDeletePost } from "../middlewares";
 // controllers
-import { createPost, uploadImage, deletePost, posts} from "../controllers/post";
+import {  uploadImage, uploadVideo, deleteImage, deleteVideo, posts} from "../controllers/post";
 
-router.post("/create-post", requireSignin, createPost);
 router.post("/upload-image", requireSignin, formidable({maxFileSize: 5 * 1024 * 1024}), uploadImage );
+router.post("/upload-video", requireSignin, formidable({maxFileSize: 5 * 1024 * 1024}), uploadVideo );
 
-router.delete('/delete-post/:_id',requireSignin, canEditDeletePost, deletePost);
+
+router.delete('/delete-image/:_id',requireSignin, canEditDeletePost, deleteImage);
+router.delete('/delete-video/:_id',requireSignin, canEditDeletePost, deleteVideo);
 
 router.get('/posts', posts);
 

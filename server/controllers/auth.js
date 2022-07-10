@@ -61,3 +61,4 @@ export const currentUser = async (req, res) => {
         res.sendStatus(400);
     }
 };
+

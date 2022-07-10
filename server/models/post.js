@@ -6,16 +6,25 @@ const postSchema = new mongoose.Schema({
         type: {},
         required: true,
     },
-
+    postedBy: {
+        type: ObjectId,
+        ref: "User",
+    },
     image: {
         url: String,
         public_id: String,
     },
-
-    video: {
-        url: String,
-        public_id: String,
-    },
+    likes: [{type: ObjectId, ref:"User"}],
+    comments: [
+        {
+            text: String,
+            created: {type: Date, default: Date.now},
+            postedBy: {
+                type: ObjectId,
+                ref: "User",
+            },
+        },
+    ],
 }, {timestamps: true}
 );
 
